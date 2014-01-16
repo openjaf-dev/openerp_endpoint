@@ -1,0 +1,119 @@
+{
+  "name": "openerp",
+  "display": "OpenERP",
+  "description": "OpenERP Endpoint",
+  "help": "https://github.com/spree/openerp_endpoint",
+  "icon_url": "openerp.png",
+  "services": [
+    {
+      "name": "order_export",
+      "path": "/order_export",
+      "description": "Send new and updated orders to OpenERP",
+      "requires": {
+        "parameters": [
+          {
+            "name": "api_user",
+            "description": "OpenERP User",
+            "data_type": "string",
+            "optional": false
+          },
+          {
+            "name": "api_password",
+            "description": "OpenERP Password",
+            "data_type": "password",
+            "optional": false
+          },
+          {
+            "name": "api_database",
+            "description": "OpenERP Database",
+            "data_type": "string",
+            "optional": false
+          },
+          {
+            "name": "api_url",
+            "description": "OpenERP API URL",
+            "data_type": "string",
+            "optional": false
+          },
+          {
+            "name": "pricelist",
+            "description": "Pricelist for Orders (Do not include currency)",
+            "data_type": "string",
+            "optional": false
+          },
+          {
+            "name": "shop",
+            "description": "Shop ID",
+            "data_type": "string",
+            "optional": false
+          },
+          {
+            "name": "shipping_policy",
+            "description": "Shipping Policy",
+            "data_type": "string",
+            "allowed": ["Deliver each product when available", "Deliver all products at once"],
+            "optional": false
+          },
+          {
+            "name": "invoice_policy",
+            "description": "Invoice Policy (value of Create Policy field)",
+            "data_type": "string",
+            "allowed": ["On Demand", "On Delivery Order", "Before Delivery"],
+            "optional": false
+          },
+          {
+            "name": "shipping_lookup",
+            "description": "Shipping Method Details",
+            "data_type": "list",
+            "optional": false
+          }
+        ]
+      },
+      "recommends": {
+        "messages": ["order:new", "order:updated"],
+        "options": {
+          "retries_allowed": true
+        }
+      }
+    },
+    {
+      "name": "monitor_stock",
+      "path": "/monitor_stock",
+      "description": "Sync product quantities with OpenERP",
+      "requires": {
+        "parameters": [
+          {
+            "name": "api_user",
+            "description": "OpenERP User",
+            "data_type": "string",
+            "optional": false
+          },
+          {
+            "name": "api_password",
+            "description": "OpenERP Password",
+            "data_type": "password",
+            "optional": false
+          },
+          {
+            "name": "api_database",
+            "description": "OpenERP Database",
+            "data_type": "string",
+            "optional": false
+          },
+          {
+            "name": "api_url",
+            "description": "OpenERP API URL",
+            "data_type": "string",
+            "optional": false
+          }
+        ]
+      },
+      "recommends": {
+        "messages": ["stock:query"]
+        "options": {
+          "retries_allowed": true
+        }
+      }
+    }
+  ]
+}
