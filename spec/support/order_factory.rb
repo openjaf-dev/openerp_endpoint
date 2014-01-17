@@ -12,7 +12,7 @@ module Factories
           "item" => 99.95,
           "adjustment" => 15,
           "tax" => 5,
-          "shipping" => 0,
+          "shipping" => 7,
           "payment" => 114.95,
           "order" => 114.95
       },

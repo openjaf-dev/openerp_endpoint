@@ -12,7 +12,7 @@ module OpenErp
       raise OpenErpEndpointError, "All products in the order must exist on OpenERP!" unless validate_line_items?
 
       order = SaleOrder.new({
-        name: "Spree Order #{payload['order']['number']}",
+        name: payload['order']['number'],
         date_order: Time.parse(payload['order']['updated_at']).strftime('%Y-%m-%e'),
         state: "done",
         invoice_quantity: "order"
@@ -31,6 +31,8 @@ module OpenErp
 
       order.save
       set_line_items(order)
+      create_shipping_line(order)
+      create_taxes_line(order)
       order.reload
     end
 
@@ -93,6 +95,24 @@ module OpenErp
         line.product_id = ProductProduct.find(name: line_payload['variant']['name']).first.id
         line.product_uom_qty = line_payload['quantity'].to_f
         line.price_unit = line_payload['price']
+        line.save
+      end
+
+      def create_taxes_line(order)
+        line = SaleOrderLine.new
+        line.order_id = order.id
+        line.name = "Taxes"
+        line.product_uom_qty = 1.0
+        line.price_unit = payload['order']['totals']['tax']
+        line.save
+      end
+
+      def create_shipping_line(order)
+        line = SaleOrderLine.new
+        line.order_id = order.id
+        line.name = "Shipping"
+        line.product_uom_qty = 1.0
+        line.price_unit = payload['order']['totals']['shipping']
         line.save
       end
 
