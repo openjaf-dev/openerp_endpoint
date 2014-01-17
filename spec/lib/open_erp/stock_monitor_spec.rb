@@ -3,10 +3,10 @@ require 'spec_helper'
 describe OpenErp::StockMonitor do
   before(:all) do
     VCR.use_cassette('ooor') do
-      Ooor.new url: 'nothing',
-               database: 'nothing',
-               username: 'nothing',
-               password: 'nothing'
+      Ooor.new url: ENV['OERP_URL'],
+               database: ENV['OERP_DB'],
+               username: ENV['OERP_USER'],
+               password: ENV['OERP_PASS']
     end
   end
 
