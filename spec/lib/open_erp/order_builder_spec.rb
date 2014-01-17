@@ -23,7 +23,7 @@ describe OpenErp::OrderBuilder do
   end
 
   before(:each) do
-    payload['order']['number'] = "3dced1113345432111"
+    payload['order']['number'] = "4dced1113345432111"
   end
 
   describe "#build!" do

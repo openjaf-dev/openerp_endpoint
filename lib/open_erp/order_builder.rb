@@ -108,9 +108,11 @@ module OpenErp
       end
 
       def create_shipping_line(order)
+        shipment_numbers = payload['order']['shipments']
+          .map { |shipment| shipment['number'] }.join(', ')
         line = SaleOrderLine.new
         line.order_id = order.id
-        line.name = "Shipping"
+        line.name = "Shipping - #{shipment_numbers}"
         line.product_uom_qty = 1.0
         line.price_unit = payload['order']['totals']['shipping']
         line.save
