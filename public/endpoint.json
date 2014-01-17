@@ -114,6 +114,45 @@
           "retries_allowed": true
         }
       }
+    },
+    {
+      "name": "confirm_shipment",
+      "path": "/confirm_shipment",
+      "description": "Sync order shipment details between OpenERP and Spree",
+      "requires": {
+        "parameters": [
+          {
+            "name": "api_user",
+            "description": "OpenERP User",
+            "data_type": "string",
+            "optional": false
+          },
+          {
+            "name": "api_password",
+            "description": "OpenERP Password",
+            "data_type": "password",
+            "optional": false
+          },
+          {
+            "name": "api_database",
+            "description": "OpenERP Database",
+            "data_type": "string",
+            "optional": false
+          },
+          {
+            "name": "api_url",
+            "description": "OpenERP API URL",
+            "data_type": "string",
+            "optional": false
+          }
+        ]
+      },
+      "recommends": {
+        "messages": ["openerp:shipment:confirm"],
+        "options": {
+          "retries_allowed": true
+        }
+      }
     }
   ]
 }
