@@ -109,7 +109,7 @@
         ]
       },
       "recommends": {
-        "messages": ["stock:query"]
+        "messages": ["stock:query"],
         "options": {
           "retries_allowed": true
         }
@@ -149,6 +149,10 @@
       },
       "recommends": {
         "messages": ["openerp:shipment:confirm"],
+        "schedule": {
+          "count": 10,
+          "interval": "minutes"
+        },
         "options": {
           "retries_allowed": true
         }
