@@ -27,6 +27,7 @@ module OpenErp
       order.partner_shipping_id = set_partner_shipping_id(payload['order']['email'], order)
       order.shop_id = SaleShop.find(id: config['openerp.shop'].to_i).first.id
       order.pricelist_id = set_pricelist(config['openerp.pricelist'])
+      order.incoterm = 2
       update_totals(order)
 
       order.save

@@ -23,7 +23,7 @@ describe OpenErp::OrderBuilder do
   end
 
   before(:each) do
-    payload['order']['number'] = "4dced1113345432111"
+    payload['order']['number'] = "5dced1113345432111"
   end
 
   describe "#build!" do
@@ -42,6 +42,7 @@ describe OpenErp::OrderBuilder do
         order.invoice_quantity.should == 'order'
         order.order_line.should be_present
         order.currency_id.should be_present
+        order.incoterm.should be_present
       end
     end
   end

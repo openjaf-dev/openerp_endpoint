@@ -60,12 +60,6 @@
             "data_type": "string",
             "allowed": ["On Demand", "On Delivery Order", "Before Delivery"],
             "optional": false
-          },
-          {
-            "name": "shipping_lookup",
-            "description": "Shipping Method Details",
-            "data_type": "list",
-            "optional": false
           }
         ]
       },
