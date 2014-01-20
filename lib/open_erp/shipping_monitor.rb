@@ -3,8 +3,6 @@ module OpenErp
     class << self
       def run!
         orders = SaleOrder.find(:all, :domain => ['x_poll_for_shipping', '=', true])
-        return [] if orders.empty?
-
         result = []
 
         orders.each do |order|

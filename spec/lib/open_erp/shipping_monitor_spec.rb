@@ -16,6 +16,13 @@ describe OpenErp::ShippingMonitor do
       result.should be_a Array
       result.length.should == 2
     end
+
+    it "return an empty array if no orders could be found" do
+      SaleOrder.should_receive(:find).exactly(:once).and_return([])
+      result = described_class.run!
+      result.should be_a Array
+      result.should be_empty
+    end
   end
 
   describe ".find_order_shipments" do
