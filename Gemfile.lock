@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: git@github.com:spree/endpoint_base.git
-  revision: a99f81c2966738fa9d77a0dfd1b6aa2d10d1ac55
+  revision: fed28931ad4265b96497d30690a75ac5b7be239d
   specs:
     endpoint_base (0.1.0)
       activesupport
