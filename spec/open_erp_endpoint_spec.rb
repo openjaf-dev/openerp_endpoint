@@ -97,4 +97,26 @@ describe OpenErpEndpoint do
       end
     end
   end
+
+  describe '/confirm_shipment' do
+    context 'success' do
+      it 'generates a shipment confirm message for a shipped order' do
+        message = {
+          message_id: 123456,
+          message: 'openerp:shipment:confirm',
+          payload: {
+            parameters: params
+          }
+        }.to_json
+
+        VCR.use_cassette('confirm_shipment_success') do
+          post '/confirm_shipment', message, auth
+          last_response.status.should == 200
+          last_response.body.should match /Confirmed shipment/
+          last_response.body.should match /shipment:confirm/
+          last_response.body.should match /inflate/
+        end
+      end
+    end
+  end
 end

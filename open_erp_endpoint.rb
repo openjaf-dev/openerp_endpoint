@@ -40,6 +40,21 @@ class OpenErpEndpoint < EndpointBase::Sinatra::Base
     process_result code
   end
 
+  post '/confirm_shipment' do
+    begin
+      code = 200
+      response = @client.confirm_shipment
+      add_messages 'shipment:confirm', response
+
+      add_notification 'info', 'Confirmed shipment', 'The shipment was confirmed'
+    rescue => e
+      raise "#{e.message} #{e.backtrace.inspect}"
+      code = 500
+      error_notification(e)
+    end
+    process_result code
+  end
+
   def error_notification(error)
     add_notification 'error', 'An OpenERP Endpoint error has occured', "#{error.message}\n#{error.backtrace.join("\n")}"
   end

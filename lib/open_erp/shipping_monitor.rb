@@ -17,6 +17,8 @@ module OpenErp
       def find_order_shipments(order)
         order.order_line.find { |ol| ol.name =~ /Shipping/ }.name
           .split('- ').last.split(',').map(&:strip)
+      rescue
+        raise OpenErpEndpointError, "No shipment line item could be found for order #{order.name}!"
       end
 
       def shipments_to_shipment_confirm_messages(order)

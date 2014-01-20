@@ -1,6 +1,3 @@
-require 'ooor'
-require 'pry'
-
 module OpenErp
   class Client
     attr_reader :client
@@ -12,15 +9,19 @@ module OpenErp
 
 
     def send_order(payload, config)
-      result = OpenErp::OrderBuilder.new(payload, config).build!
+      OpenErp::OrderBuilder.new(payload, config).build!
     end
 
     def send_updated_order(payload, config)
-      result = OpenErp::OrderBuilder.new(payload, config).update!
+      OpenErp::OrderBuilder.new(payload, config).update!
     end
 
     def update_stock(payload)
-      result = OpenErp::StockMonitor.run!(payload)
+      OpenErp::StockMonitor.run!(payload)
+    end
+
+    def confirm_shipment
+      OpenErp::ShippingMonitor.run!
     end
   end
 end
