@@ -24,14 +24,10 @@ module OpenErp
       def shipments_to_shipment_confirm_messages(order)
         ShippingMonitor.find_order_shipments(order).map do |shipment_number|
           {
-            message: 'shipment:confirm',
-            inflate: true,
-            payload: {
-              shipment: {
-                number: shipment_number,
-                order_number: order.name,
-                tracking: order.x_tracking_number
-              }
+            shipment: {
+              number: shipment_number,
+              order_number: order.name,
+              tracking: order.x_tracking_number
             }
           }
         end

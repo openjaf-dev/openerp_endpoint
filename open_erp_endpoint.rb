@@ -1,4 +1,5 @@
 require_relative './lib/open_erp'
+require 'pry'
 
 class OpenErpEndpoint < EndpointBase::Sinatra::Base
   set :logging, true
@@ -44,11 +45,9 @@ class OpenErpEndpoint < EndpointBase::Sinatra::Base
     begin
       code = 200
       response = @client.confirm_shipment
-      add_messages 'shipment:confirm', response
-
+      add_messages 'shipment:confirm', response, :inflate => true
       add_notification 'info', 'Confirmed shipment', 'The shipment was confirmed'
     rescue => e
-      raise "#{e.message} #{e.backtrace.inspect}"
       code = 500
       error_notification(e)
     end
