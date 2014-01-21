@@ -23,5 +23,9 @@ module OpenErp
     def confirm_shipment
       OpenErp::ShippingMonitor.run!
     end
+
+    def import_products
+      OpenErp::ProductImporter.run!
+    end
   end
 end

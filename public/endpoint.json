@@ -6,6 +6,49 @@
   "icon_url": "openerp.png",
   "services": [
     {
+      "name": "product_import",
+      "path": "/import_products",
+      "description": "Import products from OpenERP into your storefront",
+      "requires": {
+        "parameters": [
+          {
+            "name": "api_user",
+            "description": "OpenERP User",
+            "data_type": "string",
+            "optional": false
+          },
+          {
+            "name": "api_password",
+            "description": "OpenERP Password",
+            "data_type": "password",
+            "optional": false
+          },
+          {
+            "name": "api_database",
+            "description": "OpenERP Database",
+            "data_type": "string",
+            "optional": false
+          },
+          {
+            "name": "api_url",
+            "description": "OpenERP API URL",
+            "data_type": "string",
+            "optional": false
+          }
+        ]
+      },
+      "recommends": {
+        "messages": ["openerp:product:import"],
+        "schedule": {
+          "count": 10,
+          "interval": "minutes"
+        },
+        "options": {
+          "retries_allowed": true
+        }
+      }
+    },
+    {
       "name": "order_export",
       "path": "/order_export",
       "description": "Send new and updated orders to OpenERP",

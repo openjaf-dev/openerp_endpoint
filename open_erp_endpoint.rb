@@ -9,6 +9,18 @@ class OpenErpEndpoint < EndpointBase::Sinatra::Base
                                   @config['openerp.api_user'], @config['openerp.api_password'])
   end
 
+  post '/import_products' do
+    begin
+      code = 200
+      response = @client.import_products
+      # add_notification 'info', 'Confirmed shipment', 'The shipment was confirmed'
+    rescue => e
+      code = 500
+      error_notification(e)
+    end
+    process_result code
+  end
+
   post '/order_export' do
     begin
       code = 200
