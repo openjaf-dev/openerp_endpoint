@@ -58,7 +58,7 @@ class OpenErpEndpoint < EndpointBase::Sinatra::Base
       code = 200
       response = @client.confirm_shipment
       add_messages 'shipment:confirm', response, :inflate => true
-      add_notification 'info', 'Confirmed shipment', 'The shipment was confirmed'
+      add_notification 'info', 'Confirmed shipments', 'All pending shipments from OpenERP have been marked as shipped.'
     rescue => e
       code = 500
       error_notification(e)
