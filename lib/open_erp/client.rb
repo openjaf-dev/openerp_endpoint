@@ -5,6 +5,9 @@ module OpenErp
     def initialize(url, database, username, password)
       @client = Ooor.new url: url,           database: database,
                          username: username, password: password
+    rescue
+      raise OpenErpEndpointError, 'There was a problem establishing a connection to OpenERP.
+        Please ensure your credentials are valid.'
     end
 
 
