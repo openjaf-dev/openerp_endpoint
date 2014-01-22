@@ -35,7 +35,7 @@ describe OpenErp::ShippingMonitor do
     it "returns an array of shipment:confirm messages" do
       messages = described_class.shipments_to_shipment_confirm_messages(order)
       messages.length.should == 2
-      messages.all? { |m| m[:payload][:shipment][:number].present? }.should be_true
+      messages.all? { |m| m[:shipment][:number].present? }.should be_true
     end
   end
 end
