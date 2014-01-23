@@ -103,6 +103,12 @@
             "data_type": "string",
             "allowed": ["On Demand", "On Delivery Order", "Before Delivery"],
             "optional": false
+          },
+          {
+            "name": "shipping_name",
+            "description": "Shipping/Incoterm Name",
+            "data_type": "string",
+            "optional": false
           }
         ]
       },
