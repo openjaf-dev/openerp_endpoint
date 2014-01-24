@@ -5,8 +5,8 @@ module OpenErp
         products = ProductProduct.find(:all, :domain => ['waiting_spree_import', '=', true])
         result = []
 
-        non_variant_products = products.find_all { |p| p.variants.nil? }
-        variant_products = products.find_all { |p| !p.variants.nil? }
+        non_variant_products = products.find_all { |p| p.variants.nil? }.first(25)
+        variant_products = products.find_all { |p| !p.variants.nil? }.first(25)
 
         non_variant_products.each do |product|
           begin
