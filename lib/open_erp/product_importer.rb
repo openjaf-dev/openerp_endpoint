@@ -5,16 +5,58 @@ module OpenErp
         products = ProductProduct.find(:all, :domain => ['waiting_spree_import', '=', true])
         result = []
 
-        products.each do |product|
+        non_variant_products = products.find_all { |p| p.variants.nil? }
+        variant_products = products.find_all { |p| !p.variants.nil? }
+
+        non_variant_products.each do |product|
           result << ProductImporter.product_to_product_import_message(product)
           product.waiting_spree_import = false
           product.save
         end
 
+        variant_products.each do |product|
+          result << ProductImporter.variant_product_to_product_import_message(product)
+          product.waiting_spree_import = false
+          product.save
+        end
+
+        result
       end
 
       def product_to_product_import_message(product)
+        {
+          product: {
+            sku: product.default_code,
+            name: product.name,
+            price: product.list_price,
+            description: product.description
+          }
+        }
+      end
 
+      def variant_product_to_product_import_message(product)
+        {
+          product: {
+            sku: product.permalink,
+            name: product.name,
+            price: product.list_price,
+            description: product.description,
+            variants: [
+              {
+                name: product.variants,
+                sku: product.default_code,
+                price: product.list_price,
+                options: [{
+                  ProductImporter.hyphenate_variant(product.variants) => product.variants
+                }]
+              }
+            ]
+          }
+        }
+      end
+
+      def hyphenate_variant(name)
+        name.downcase.gsub(' ', '-')
       end
     end
   end
