@@ -13,9 +13,11 @@ class OpenErpEndpoint < EndpointBase::Sinatra::Base
     begin
       code = 200
       response = @client.import_products
-      # add_notification 'info', 'Confirmed shipment', 'The shipment was confirmed'
+      add_messages 'product:import', response
+      add_notification 'info', 'Imported products from OpenERP', 'All products waiting for import from OpenERP have been imported.'
     rescue => e
       code = 500
+      raise "#{e.message} ||| #{e.backtrace}".inspect
       error_notification(e)
     end
     process_result code

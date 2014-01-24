@@ -9,13 +9,21 @@ module OpenErp
         variant_products = products.find_all { |p| !p.variants.nil? }
 
         non_variant_products.each do |product|
-          result << ProductImporter.product_to_product_import_message(product)
+          begin
+            result << ProductImporter.product_to_product_import_message(product)
+          rescue StandardError => e
+            raise OpenErpEndpointError, "The product #{product.name} could not be imported!"
+          end
           product.waiting_spree_import = false
           product.save
         end
 
         variant_products.each do |product|
-          result << ProductImporter.variant_product_to_product_import_message(product)
+          begin
+            result << ProductImporter.variant_product_to_product_import_message(product)
+          rescue StandardError => e
+            raise OpenErpEndpointError, "The product #{product.name} could not be imported!"
+          end
           product.waiting_spree_import = false
           product.save
         end

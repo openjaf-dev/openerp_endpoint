@@ -119,4 +119,25 @@ describe OpenErpEndpoint do
       end
     end
   end
+
+  describe '/import_products' do
+    context 'success' do
+      it 'generates a product:import for an imported product' do
+        message = {
+          message_id: 123456,
+          message: 'openerp:product:import',
+          payload: {
+            parameters: params
+          }
+        }.to_json
+
+        VCR.use_cassette('import_product_success') do
+          post '/import_products', message, auth
+          last_response.status.should == 200
+          last_response.body.should match /Imported products/
+          last_response.body.should match /product:import/
+        end
+      end
+    end
+  end
 end
