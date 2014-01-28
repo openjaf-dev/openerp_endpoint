@@ -64,7 +64,7 @@ module OpenErp
       end
 
       def find_order
-        order = SaleOrder.find(name: "Spree Order #{payload['order']['number']}").first
+        order = SaleOrder.find(name: "#{payload['order']['number']}").first
         return order if order
         raise OpenErpEndpointError, "Order #{payload['order']['number']} could not be found on OpenErp!"
       end
