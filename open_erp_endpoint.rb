@@ -1,5 +1,4 @@
 require_relative './lib/open_erp'
-require 'pry'
 
 class OpenErpEndpoint < EndpointBase::Sinatra::Base
   set :logging, true
