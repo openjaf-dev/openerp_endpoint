@@ -34,6 +34,7 @@ module OpenErp
       set_line_items(order)
       create_shipping_line(order)
       create_taxes_line(order)
+      create_discount_line(order)
       order.reload
     end
 
@@ -105,6 +106,20 @@ module OpenErp
         line.name = "Taxes"
         line.product_uom_qty = 1.0
         line.price_unit = payload['order']['totals']['tax']
+        line.save
+      end
+
+      def create_discount_line(order)
+        discount_adjustments = payload['order']['adjustments'].find_all do |adjustment|
+          adjustment['value'].to_f < 0
+        end
+        return unless discount_adjustments
+
+        line = SaleOrderLine.new
+        line.order_id = order.id
+        line.name = "Discounts"
+        line.product_uom_qty = 1.0
+        line.price_unit = discount_adjustments.sum { |adj| adj['value'] }
         line.save
       end
 
