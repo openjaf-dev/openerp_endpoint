@@ -39,6 +39,10 @@ module Factories
           {
               "name" => "North America 5.0%",
               "value" => 5
+          },
+          {
+              "name" => "Promotion",
+              "value" => -2
           }
       ],
       "shipping_address" => {

@@ -23,13 +23,14 @@ describe OpenErp::OrderBuilder do
   end
 
   before(:each) do
-    payload['order']['number'] = "5dced1113345432111"
+    payload['order']['number'] = "5dced1113345432311"
   end
 
   describe "#build!" do
     it "sets the required attributes" do
       subject.should_receive(:create_taxes_line).and_call_original
       subject.should_receive(:create_shipping_line).and_call_original
+      subject.should_receive(:create_discount_line).and_call_original
 
       VCR.use_cassette('build_order') do
         order = subject.build!

@@ -7,6 +7,7 @@ module Factories
       { 'name' => 'openerp.api_url',                    'value' => ENV['OERP_URL'] },
       { 'name' => 'openerp.shop',                       'value' => '1' },
       { 'name' => 'openerp.shipping_policy',            'value' => 'Deliver all products at once' },
+      { 'name' => 'openerp.shipping_name',              'value' => 'FREE CARRIER' },
       { 'name' => 'openerp.invoice_policy',             'value' => 'Before Delivery' },
       { 'name' => 'openerp.pricelist',                  'value' => 'Public Pricelist' },
       { 'name' => 'openerp.shipping_lookup',            'value' => [] }
