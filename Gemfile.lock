@@ -8,10 +8,10 @@ GIT
 
 GIT
   remote: git@github.com:spree/endpoint_base.git
-  revision: fed28931ad4265b96497d30690a75ac5b7be239d
-  ref: fed28931ad42
+  revision: 2a9d35f57854c55f634f415e5520551584e00d58
+  branch: v5
   specs:
-    endpoint_base (0.1.0)
+    endpoint_base (0.1.1)
       activesupport
       jbuilder
       json

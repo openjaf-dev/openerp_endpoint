@@ -29,5 +29,5 @@ group :development do
   gem 'terminal-notifier-guard'
 end
 
-gem 'endpoint_base', git: 'git@github.com:spree/endpoint_base.git', :ref => 'fed28931ad42'
+gem 'endpoint_base', git: 'git@github.com:spree/endpoint_base.git', :branch => 'v5'
   # :path => '../endpoint_base'
