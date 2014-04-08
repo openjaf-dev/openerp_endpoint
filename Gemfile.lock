@@ -7,10 +7,10 @@ GIT
       faraday
 
 GIT
-  remote: git@github.com:spree/endpoint_base.git
-  revision: fed28931ad4265b96497d30690a75ac5b7be239d
+  remote: git://github.com/spree/endpoint_base.git
+  revision: fefcdcb520559534584945885ed8b7e28dffc437
   specs:
-    endpoint_base (0.1.0)
+    endpoint_base (0.3)
       activesupport
       jbuilder
       json

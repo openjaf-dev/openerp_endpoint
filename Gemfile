@@ -29,5 +29,4 @@ group :development do
   gem 'terminal-notifier-guard'
 end
 
-gem 'endpoint_base', git: 'git@github.com:spree/endpoint_base.git'
-  # :path => '../endpoint_base'
+gem 'endpoint_base', github: 'spree/endpoint_base'
