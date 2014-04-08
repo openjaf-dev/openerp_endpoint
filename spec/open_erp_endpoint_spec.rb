@@ -5,10 +5,6 @@ describe OpenErpEndpoint do
     OpenErpEndpoint
   end
 
-  def auth
-    {'HTTP_X_AUGURY_TOKEN' => '6a204bd89f3c8348afd5c77c717a097a', "CONTENT_TYPE" => "application/json"}
-  end
-
   let(:order) { Factories.order }
   let(:original) { Factories.original }
   let(:params) { Factories.parameters }
@@ -18,13 +14,8 @@ describe OpenErpEndpoint do
       context 'success' do
         it 'sends the order to OpenERP' do
           message = {
-            message_id: '123456',
-            message: 'order:new',
-            payload: {
-              order: order,
-              original: original,
-              parameters: params
-            }
+            order: order,
+            parameters: params
           }.to_json
 
           VCR.use_cassette('order_export_success') do
@@ -40,13 +31,8 @@ describe OpenErpEndpoint do
       context 'success' do
         it 'sends the order to OpenERP' do
           message = {
-            message_id: 123456,
-            message: 'order:updated',
-            payload: {
-              order: order,
-              original: original,
-              parameters: params
-            }
+            order: order,
+            parameters: params
           }.to_json
 
           VCR.use_cassette('order_export_update_success') do
@@ -63,12 +49,8 @@ describe OpenErpEndpoint do
     context 'success' do
       it 'generates a stock actual message for a changed product' do
         message = {
-          message_id: 123456,
-          message: 'stock:query',
-          payload: {
-            sku: 'ROR-00011',
-            parameters: params
-          }
+          sku: 'ROR-00011',
+          parameters: params
         }.to_json
 
         VCR.use_cassette('monitor_stock_success') do
@@ -81,12 +63,8 @@ describe OpenErpEndpoint do
     context 'failure' do
       it 'returns an error notification if the product does not exist on OpenERP' do
         message = {
-          message_id: 123456,
-          message: 'stock:query',
-          payload: {
-            sku: 'ROR-99999',
-            parameters: params
-          }
+          sku: 'ROR-99999',
+          parameters: params
         }.to_json
 
         VCR.use_cassette('monitor_stock_no_product') do
@@ -102,11 +80,7 @@ describe OpenErpEndpoint do
     context 'success' do
       it 'generates a shipment confirm message for a shipped order' do
         message = {
-          message_id: 123456,
-          message: 'openerp:shipment:confirm',
-          payload: {
-            parameters: params
-          }
+          parameters: params
         }.to_json
 
         VCR.use_cassette('confirm_shipment_success') do
@@ -124,11 +98,7 @@ describe OpenErpEndpoint do
     context 'success' do
       it 'generates a product:import for an imported product' do
         message = {
-          message_id: 123456,
-          message: 'openerp:product:import',
-          payload: {
-            parameters: params
-          }
+          parameters: params
         }.to_json
 
         VCR.use_cassette('import_product_success') do

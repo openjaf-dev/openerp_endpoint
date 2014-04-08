@@ -1,17 +1,17 @@
 module Factories
   def self.parameters
-    [
-      { 'name' => 'openerp.api_user',                   'value' => ENV['OERP_USER'] },
-      { 'name' => 'openerp.api_password',               'value' => ENV['OERP_PASS'] },
-      { 'name' => 'openerp.api_database',               'value' => ENV['OERP_DB'] },
-      { 'name' => 'openerp.api_url',                    'value' => ENV['OERP_URL'] },
-      { 'name' => 'openerp.shop',                       'value' => '1' },
-      { 'name' => 'openerp.shipping_policy',            'value' => 'Deliver all products at once' },
-      { 'name' => 'openerp.shipping_name',              'value' => 'FREE CARRIER' },
-      { 'name' => 'openerp.invoice_policy',             'value' => 'Before Delivery' },
-      { 'name' => 'openerp.pricelist',                  'value' => 'Public Pricelist' },
-      { 'name' => 'openerp.shipping_lookup',            'value' => [] }
-    ]
+    {
+      'openerp_api_user'                   => ENV['OERP_USER'],
+      'openerp_api_password'               => ENV['OERP_PASS'],
+      'openerp_api_database'               => ENV['OERP_DB'],
+      'openerp_api_url'                    => ENV['OERP_URL'],
+      'openerp_shop'                       => '1',
+      'openerp_shipping_policy'            => 'Deliver all products at once',
+      'openerp_shipping_name'              => 'FREE CARRIER',
+      'openerp_invoice_policy'             => 'Before Delivery',
+      'openerp_pricelist'                  => 'Public Pricelist',
+      'openerp_shipping_lookup'            => []
+    }
   end
 
   def self.config
