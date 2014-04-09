@@ -25,9 +25,9 @@ module OpenErp
       order.shipped = payload['order']['status'] == 'complete' ? true : false
       order.partner_invoice_id = order.partner_id
       order.partner_shipping_id = set_partner_shipping_id(payload['order']['email'], order)
-      order.shop_id = SaleShop.find(id: config['openerp.shop'].to_i).first.id
-      order.pricelist_id = set_pricelist(config['openerp.pricelist'])
-      order.incoterm = StockIncoterms.find(:all, :domain => ['name', '=', config['openerp.shipping_name']]).first.try(:id)
+      order.shop_id = SaleShop.find(id: config['openerp_shop'].to_i).first.id
+      order.pricelist_id = set_pricelist(config['openerp_pricelist'])
+      order.incoterm = StockIncoterms.find(:all, :domain => ['name', '=', config['openerp_shipping_name']]).first.try(:id)
       update_totals(order)
 
       order.save
@@ -55,9 +55,9 @@ module OpenErp
     private
 
       def validate_line_items?
-        payload['original']['line_items'].any? do |line_item|
-          ProductProduct.find(name: line_item['variant']['name']).length < 1
-        end ? false : true
+        !payload[:order][:line_items].any? do |line_item|
+          ::ProductProduct.find(name: line_item['variant']['name']).length < 1
+        end
       end
 
       def update_totals(order)

@@ -8,7 +8,7 @@ class OpenErpEndpoint < EndpointBase::Sinatra::Base
                                   @config['openerp_api_user'], @config['openerp_api_password'])
   end
 
-  post '/import_products' do
+  post '/get_products' do
     begin
       code = 200
       response = @client.import_products
@@ -21,14 +21,23 @@ class OpenErpEndpoint < EndpointBase::Sinatra::Base
     process_result code
   end
 
-  post '/order_export' do
+  post '/add_order' do
     begin
       code = 200
-      if @message[:message] == "order:new"
-        response = @client.send_order(@payload, @config)
-      else
-        response = @client.send_updated_order(@payload, @config)
-      end
+      response = @client.send_order(@payload, @config)
+      set_summary "The order #{@payload['order']['number']} was sent to OpenERP as #{response.name}."
+    rescue => e
+      code = 500
+      set_summary e.message
+    end
+
+    process_result 200
+  end
+
+  post '/update_order' do
+    begin
+      code = 200
+      response = @client.send_updated_order(@payload, @config)
       set_summary "The order #{@payload['order']['number']} was sent to OpenERP as #{response.name}."
     rescue => e
       code = 500
@@ -38,7 +47,7 @@ class OpenErpEndpoint < EndpointBase::Sinatra::Base
     process_result code
   end
 
-  post '/monitor_stock' do
+  post '/get_inventory' do
     begin
       code = 200
       response = @client.update_stock(@payload)

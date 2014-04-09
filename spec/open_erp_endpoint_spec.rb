@@ -6,7 +6,6 @@ describe OpenErpEndpoint do
   end
 
   let(:order) { Factories.order }
-  let(:original) { Factories.original }
   let(:params) { Factories.parameters }
 
   describe '/order_export' do
@@ -19,7 +18,7 @@ describe OpenErpEndpoint do
           }.to_json
 
           VCR.use_cassette('order_export_success') do
-            post '/order_export', message, auth
+            post '/add_order', message, auth
             last_response.status.should == 200
             last_response.body.should match /was sent to OpenERP/
           end
@@ -36,7 +35,7 @@ describe OpenErpEndpoint do
           }.to_json
 
           VCR.use_cassette('order_export_update_success') do
-            post '/order_export', message, auth
+            post '/update_order', message, auth
             last_response.status.should == 200
             last_response.body.should match /was sent to OpenERP/
           end
@@ -45,7 +44,7 @@ describe OpenErpEndpoint do
     end
   end
 
-  describe '/monitor_stock' do
+  describe '/get_inventory' do
     context 'success' do
       it 'generates a stock actual message for a changed product' do
         message = {
@@ -54,7 +53,7 @@ describe OpenErpEndpoint do
         }.to_json
 
         VCR.use_cassette('monitor_stock_success') do
-          post '/monitor_stock', message, auth
+          post '/get_inventory', message, auth
           last_response.status.should == 200
         end
       end
@@ -68,7 +67,7 @@ describe OpenErpEndpoint do
         }.to_json
 
         VCR.use_cassette('monitor_stock_no_product') do
-          post '/monitor_stock', message, auth
+          post '/get_inventory', message, auth
           last_response.status.should == 500
           last_response.body.should match /OpenERP Endpoint error/
         end
@@ -94,7 +93,7 @@ describe OpenErpEndpoint do
     end
   end
 
-  describe '/import_products' do
+  describe '/get_products' do
     context 'success' do
       it 'generates a product:import for an imported product' do
         message = {
@@ -102,7 +101,7 @@ describe OpenErpEndpoint do
         }.to_json
 
         VCR.use_cassette('import_product_success') do
-          post '/import_products', message, auth
+          post '/get_products', message, auth
           last_response.status.should == 200
           last_response.body.should match /Imported products/
           last_response.body.should match /product:import/
