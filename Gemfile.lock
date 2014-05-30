@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/akretion/ooor.git
-  revision: c253cfc65fe836c3131f302e2ef9c23f50ba888f
+  revision: b431f041b94b5b309725e8f3b5bdfc8e3469ea50
   specs:
-    ooor (2.0.0)
+    ooor (2.0.4)
       activemodel (>= 2.3.5)
       faraday
 
@@ -18,18 +18,17 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    activemodel (4.0.2)
-      activesupport (= 4.0.2)
-      builder (~> 3.1.0)
-    activesupport (4.0.2)
-      i18n (~> 0.6, >= 0.6.4)
-      minitest (~> 4.2)
-      multi_json (~> 1.3)
+    activemodel (4.1.1)
+      activesupport (= 4.1.1)
+      builder (~> 3.1)
+    activesupport (4.1.1)
+      i18n (~> 0.6, >= 0.6.9)
+      json (~> 1.7, >= 1.7.7)
+      minitest (~> 5.1)
       thread_safe (~> 0.1)
-      tzinfo (~> 0.3.37)
+      tzinfo (~> 1.1)
     addressable (2.3.5)
-    atomic (1.1.14)
-    builder (3.1.4)
+    builder (3.2.2)
     capistrano (3.0.1)
       i18n
       rake (>= 10.0.0)
@@ -42,8 +41,8 @@ GEM
     diff-lcs (1.2.5)
     docile (1.1.1)
     dotenv (0.9.0)
-    faraday (0.8.9)
-      multipart-post (~> 1.2.0)
+    faraday (0.9.0)
+      multipart-post (>= 1.2, < 3)
     ffi (1.9.3)
     foreman (0.63.0)
       dotenv (>= 0.7)
@@ -73,10 +72,10 @@ GEM
       rb-inotify (>= 0.9)
     lumberjack (1.0.4)
     method_source (0.8.2)
-    minitest (4.7.5)
-    multi_json (1.8.4)
+    minitest (5.3.4)
+    multi_json (1.10.1)
     multi_xml (0.5.5)
-    multipart-post (1.2.0)
+    multipart-post (2.0.0)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.7.0)
@@ -123,15 +122,15 @@ GEM
       tins (~> 0.8)
     terminal-notifier-guard (1.5.3)
     thor (0.18.1)
-    thread_safe (0.1.3)
-      atomic
+    thread_safe (0.3.4)
     tilt (1.4.1)
     tilt-jbuilder (0.5.3)
       jbuilder
       tilt (<= 1.4.1)
     timers (1.1.0)
     tins (0.13.1)
-    tzinfo (0.3.38)
+    tzinfo (1.2.0)
+      thread_safe (~> 0.1)
     unicorn (4.7.0)
       kgio (~> 2.6)
       rack
